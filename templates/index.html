@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10 col-lg-8 col-sm-10">
+					<br>
+					<br>
+					<h1 class="mb-2">
+						EXCHANGE RATES IDR vs US DOLLAR HISTORICAL
+					</h1>
+					<h3>
+						Periode Data: 10 Januari 2022 s.d. 7 Juli 2022
+					</h3>
+					<br>
+				</div>
+			</div>
+		<div class="row">
+			<div class="col-md-4 col-lg-4 col-sm-4">
+				<div class="card card-stats">
+					<div class="card-header">
+						<div class="card-icon">
+							<i></i>
+						</div>
+						<h2 class="card-title">
+							{{ card_data }}
+						</h2>
+						<h4 class="card-category">
+							Rata-rata kurs IDR terhadap USD
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-sm-12">
+				<div class="tab">
+					<button class="tablinks" onclick="openTab(event, 'profile') " id="defaultOpen">by Profile
+					</button>
+					<button class="tablinks" onclick="openTab(event, 'Own')">Penjelasan
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-sm-12">
+				<!-- Tab content -->
+				<div id="profile" class="tabcontent">
+					<br>
+					<h3 style="color: #333333;text-align:center">Grafik Kurs Harian IDR Terhadap USD</h3>
+					<div class="img-container"">
+						{% if funded_plot != None %}
+					  <img src="data:image/png;base64,{{ plot_result }}" >
+						{% endif %}
+					</div>
+				</div>
+				<div id="Own" class="tabcontent">
+				  <!-- Define your own analysis for extra challange -->
+				  <br>
+				  <h3 style="color: #333333;text-align:center">Analysis Singkat</h3>
+				  <h3 style="color: #333333;text-align:center">''</h3>
+				  <h4 style="color: #333333;text-align:left">- Terjadi pelemahan nilai kurs rupiah (IDR) terhadap dollar (USD) pada 6 bulan terakhir.</h4>
+				  <h4 style="color: #333333;text-align:left">- Walapun sempat menguat pada periode bulan Mei sampai dengan Juni, tapi pada akhirnya di Juli nilai kurs rupiah terhadap dollar kembali melemah cukup tajam dan hampir menyentuh angka 15 ribu.</h4>
+				  <h4 style="color: #333333;text-align:left">- Pelemahan rupiah yang cepat dalam sebulan terakhir dipicu oleh banyak faktor salah faktornya adalah keputusan BI menahan suku bunga acuan sehingga dapat menahan masuknya aliran modal asing atau bahkan mendorong modal asing keluar dari indonesia.</h4>
+
+				</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+function openTab(evt, idName) {
+	// Declare all variables
+	var i, tabcontent, tablinks;
+
+	// Get all elements with class="tabcontent" and hide them
+	tabcontent = document.getElementsByClassName("tabcontent");
+	for (i = 0; i < tabcontent.length; i++) {
+	tabcontent[i].style.display = "none";
+	}
+
+	// Get all elements with class="tablinks" and remove the class "active"
+	tablinks = document.getElementsByClassName("tablinks");
+	for (i = 0; i < tablinks.length; i++) {
+	tablinks[i].className = tablinks[i].className.replace(" active", "");
+	}
+
+	// Show the current tab, and add an "active" class to the button that opened the tab
+	document.getElementById(idName).style.display = "block";
+	evt.currentTarget.className += " active";
+
+	}
+	document.getElementById("defaultOpen").click();	
+</script>
